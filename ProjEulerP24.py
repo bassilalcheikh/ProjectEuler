@@ -1,4 +1,4 @@
-# Project Euler Problem 24
+# Project Euler Problem 24: "Lexicographic Permutations"
 #
 # What is the millionth lexicographic permutation of the digits 0-9?
 #
