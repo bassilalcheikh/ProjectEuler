@@ -3,6 +3,8 @@ Select solutions to the Project Euler problem set.
 
 Problem 22: "Names scores" ....................... ProjEulerP22.py
 
+Problem 24: "Lexicographic Permutations" ......... ProjEulerP24.py
+
 Problem 57: "Square root convergents ........ ProjEulerP57.py
 
 Problem 62: "Cubic permutations" .............. ProjEulerP62.py
