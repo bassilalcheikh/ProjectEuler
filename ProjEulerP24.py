@@ -4,7 +4,6 @@
 #
 from math import factorial, floor
 
-t_0 = time()
 candidates = [i for i in range(0,10)]
 perm_elem = []
 index = 10**6-1
