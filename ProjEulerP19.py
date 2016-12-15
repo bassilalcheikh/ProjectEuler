@@ -7,18 +7,27 @@
 # months
 # weeks
 # days
-
-# January 1st, 1901 was a TUESDAY  .... January 6th, 1901 was a SUNDAY
-# December 31st, 1901 was a TUESDAY
-
-# January 1st, 1953, was a THURSDAY
-# December 31st, 1953, was a THURSDAY
-
-# January 1st, 1960, was a FRIDAY
-# December 31st, 1960, was a SATURDAY
-
+#
 days_count = (365*100+25)
 days_index = [0]*(days_count)
+
+def generate_first_of_months(year):
+    standard_year = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
+    leap_year = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
+    year_indeces = []
+    if year%4 == 0: # leap year
+        for i in range(0,366):
+            if i in leap_year:
+                year_indeces.append(1)
+            else:
+                year_indeces.append(0)
+    else: # regular year
+        for i in range(0,365):
+            if i in standard_year:
+                year_indeces.append(1)
+            else:
+                year_indeces.append(0)
+    return year_indeces
 
 for i in range(5,days_count,7):
     days_index[i] += 1
