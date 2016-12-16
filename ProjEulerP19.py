@@ -3,48 +3,50 @@
 # How many Sundays fell on the first of the month during the twentieth century
 # (1 Jan 1901 to 31 Dec 2000)?
 #
-# years
-# months
-# weeks
-# days
-#
-days_count = (365*100+25)
-days_index = [0]*(days_count)
+from time import time
 
-def generate_first_of_months(year):
-    standard_year = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
-    leap_year = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
-    year_indeces = []
-    if year%4 == 0: # leap year
-        for i in range(0,366):
-            if i in leap_year:
-                year_indeces.append(1)
-            else:
-                year_indeces.append(0)
-    else: # regular year
-        for i in range(0,365):
-            if i in standard_year:
-                year_indeces.append(1)
-            else:
-                year_indeces.append(0)
-    return year_indeces
+t_0 = time()
+def generate_sundays(years_quantity):
+    days_count = int(years_quantity*(365.25))
+    days_index = [0]*days_count
+    for i in range(5,days_count,7):
+        days_index[i] += 1
+    return days_index
 
-for i in range(5,days_count,7):
-    days_index[i] += 1
+def generate_first_of_years(years_quantity): #enter years_quantity divisible by 4
+    new_years_days = []
+    # every 1461 days, we begin a new cycle
+    total_days = int(365.25*years_quantity)
+    # [0, 365, 730, 1095]
+    for i in range(0, total_days, 1461):
+        for j in range(0,4):
+            new_years_days.append(i+j*365)
+    return new_years_days
 
-print(sum(days_index))
+all_new_years = generate_first_of_years(100)
 
-# Month| STD | Leap
-# -----|-----|-----
-# Jan  |   1 |   1
-# Feb  |  32 |  32
-# Mar  |  60 |  61
-# Apr  |  91 |  92
-# May  | 121 | 122
-# Jun  | 152 | 153
-# Jul  | 182 | 183
-# Aug  | 213 | 214
-# Sep  | 244 | 245
-# Oct  | 274 | 275
-# Nov  | 305 | 306
-# Dec  | 335 | 336
+standard_year = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
+leap_year = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
+
+set_of_days = []
+for i in all_new_years:
+    if i%4 == 0:
+        for j in leap_year:
+            set_of_days.append(i+j)
+    else:
+        for k in standard_year:
+            set_of_days.append(i+k)
+
+sundays = generate_sundays(100)
+
+counter = 0
+for i in set_of_days:
+    if sundays[i] == 1:
+        counter +=1
+t_1 = time()
+print(counter)
+
+print(t_1-t_0)
+
+# times:
+# 0.00146508216858 seconds
