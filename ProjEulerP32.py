@@ -13,28 +13,31 @@
 #
 from time import time
 t_0 = time()
-def pandigital_quality(x,y,z):
-    if len(set(str(x)+str(y)+str(z)))==len(str(x))+len(str(y))+len(str(z)):
-        #print(set(str(x)+str(y)+str(z)))
-        return True
+stuff = []
 
-products = []
-for i in range(1234,9876+1):
-    for j in range(1,9):
-        if pandigital_quality(j,i,int(float(i)/j)) and i%j==0:
-            products.append(i)
-            #print(str(j)+"x"+str(int(float(i)/j))+"="+str(i))
+#case 1:
+for i in range(1234,9876):
+    if len(stuff)==9:
+        break
+    else:
+        for j in range(1,9+1):
+            entry = str(i)+str(j)+str(i*j)
+            if len(set(entry))==len(entry) and len(entry)==9 and all(c not in '0' for c in entry):
+                stuff.append(i*j)
 
-first_cut = set([k for k in products if all(c not in '0' for c in str(k))])
+#case 2:
+for i in range(123,987):
+    if len(stuff)==108:
+        break
+    for j in range(12,99):
+        entry = str(i)+str(j)+str(i*j)
+        if len(set(entry))==len(entry) and len(entry)==9 and all(c not in '0' for c in entry):
+            stuff.append(i*j)
 
-print first_cut
-
-for a in range(1234,9876+1):
-    for b in range(12,617):
-        if pandigital_quality(a,b,int(float(a)/b)) and a%b==0:
-            products.append(a)
-
-second_cut = set([k for k in products if all(c not in '0' for c in str(k))])
+print(sum(set(stuff)))
 print(time()-t_0)
 
-print(sum(second_cut))
+# times:
+# (1) 0.31100011 seconds
+# (2) 0.30599999 seconds
+
