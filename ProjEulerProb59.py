@@ -19,10 +19,8 @@ with open('cipher.txt') as file:
     data_string = str(data)
     components = data_string.split(',')
     #distribution = elemfrequency(components)
-    #print len(components)
     # TODO PAY ATTENTION TO WHAT HAPPENS HERE
     #sorteddistro = sorted(distribution, key=distribution.get, reverse = True)
-    #print sorteddistro
 
 asciirange = range(32, 123)
 
@@ -41,8 +39,6 @@ def potentialnkey(keyindex):
             potential_key.append(nkey)
     return potential_key
 
-#print potentialnkey(1), potentialnkey(2), potentialnkey(3)
-
 def threekeydecrypt(candidate_1, candidate_2, candidate_3, length):
     decrypted = []
     for x in range(0,length):
@@ -53,7 +49,7 @@ def threekeydecrypt(candidate_1, candidate_2, candidate_3, length):
 
 # checks if your code produced words or gibberish
 def combotry(candidates_1, candidates_2, candidates_3):
-    remove_ascii_set = range(33,65)+range(91,97)
+    remove_ascii_set = range(33,65)+range(91,97) # this will be '(',')', '"', etc.
     for i in candidates_1:
         for j in candidates_2:
             for k in candidates_3:
@@ -66,7 +62,7 @@ def combotry(candidates_1, candidates_2, candidates_3):
                 test_string_v2 = " ".join(test_string_v1.split())
                 words = test_string_v2.split()
                 word_counter = 0
-                for s in words[:8]:
+                for s in words[:8]:  # "8" chosen arbitrarily; there are much more than 8 words 
                     if dictionary.check(s):
                         word_counter += 1
                         #print word_counter
