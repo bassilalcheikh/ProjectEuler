@@ -10,47 +10,12 @@ numeralsvector = ['M', 'D', 'C', 'L', 'X', 'V', 'I']
 subtractive_pairs = {'I':('V','X'), 'X':('L','C'), 'C':('D','M')}
 
 test_answers = {
-    '804': 'DCCCIV', 
-    '904': 'CMIV',
-    '94': 'XCIV',
-    '84': 'LXXXIV',
-    '19': 'XIX',
-    '14': 'XIV',
-    '999': 'CMXCIX',
-    '444': 'CDXLIV',
-    '49': 'XLIX',
-    '44': 'XLIV',
-    '809': 'DCCCIX',
-    '409': 'CDIX',
-    '4': 'IV',
-    '9': 'IX',
-    '45': 'XLV',
-    '39': 'XXXIX',
-    '92': 'XCII',
-    '99': 'XCIX',
-    '59': 'LIX'
+    '804': 'DCCCIV', '904': 'CMIV', '94': 'XCIV', '84': 'LXXXIV', '19': 'XIX', '14': 'XIV',
+    '999': 'CMXCIX', '444': 'CDXLIV', '49': 'XLIX', '44': 'XLIV', '809': 'DCCCIX', '409': 'CDIX',
+    '4': 'IV', '9': 'IX', '45': 'XLV', '39': 'XXXIX', '92': 'XCII', '99': 'XCIX', '59': 'LIX', '50': 'L', '550': 'DL'
 }
-test_cases = [
-    804,  
-    904, 
-    94, 
-    84, 
-    19, 
-    14, 
-    999, 
-    444, 
-    49, 
-    44, 
-    809, 
-    409, 
-    4, 
-    9, 
-    45, 
-    39, 
-    92, 
-    99, 
-    59
-]
+
+test_cases = [804, 904, 94, 84, 19, 14, 999, 444, 49, 44, 809, 409, 4, 9, 45, 39, 92, 99, 59, 50, 550]
 
 # "validromans" takes a number and produces the minimal Roman Numeral version of said number
 def validromans(n):
@@ -79,8 +44,7 @@ def efficient(r_n):
         numerallist = list(r_n)
         if len(set(r_n[0:4])) == 1 and (r_n[0] != 'M'):
             numerallist[1] = subtractive_pairs[r_n[0]][0]
-            numerallist[2] = ''
-            numerallist[3] = ''
+            numerallist[2] = numerallist[3] = ''
         for i in range(0, len(r_n)-4):
             if len(set(r_n[i+1:i+5])) == 1:
                 if r_n[i]==subtractive_pairs[r_n[i+1]][0]:
@@ -133,7 +97,6 @@ for valid_roman in romannumerals:
 
 print countcharacters(romannumerals) - countcharacters(minimalromannumerals)
 #print time()-t_0
-
 '''
 number = 500
 print validromans(number)
